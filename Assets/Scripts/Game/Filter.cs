@@ -8,9 +8,11 @@ using UnityEngine.Events;
 public class Filter : MonoBehaviour
 {
     [SerializeField]private float forceImpulse = 1;
+    [SerializeField]private float force = 1;
     [SerializeField]private Vector2 dirictionMove;
 
     public UnityEvent addImpulseEvent;
+    public UnityEvent addForceEvent;
 
     private Rigidbody2D rb;
 
@@ -27,6 +29,8 @@ public class Filter : MonoBehaviour
 
     public void AddForce()
     {
-        rb.AddForce(dirictionMove.normalized * forceImpulse);
+        rb.AddForce(dirictionMove.normalized * force, ForceMode2D.Force);
+        addForceEvent?.Invoke();
+
     }
 }
