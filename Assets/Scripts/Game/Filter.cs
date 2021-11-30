@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,6 +11,9 @@ public class Filter : MonoBehaviour
 
     public UnityEvent addImpulseEvent;
     public UnityEvent addForceEvent;
+
+    public UnityEvent takeObjectAEvent;
+    public UnityEvent takeObjectBEvent;
 
     private Rigidbody2D rb;
 
@@ -31,6 +32,15 @@ public class Filter : MonoBehaviour
     {
         rb.AddForce(dirictionMove.normalized * force, ForceMode2D.Force);
         addForceEvent?.Invoke();
+    }
 
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<ObjectA>())
+            takeObjectAEvent?.Invoke();
+
+        if (collision.gameObject.GetComponent<ObjectB>())
+            takeObjectBEvent?.Invoke();
     }
 }

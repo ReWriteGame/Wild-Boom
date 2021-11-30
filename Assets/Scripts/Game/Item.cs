@@ -8,5 +8,8 @@ public class Item : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Filter>())
             gameObject.GetComponent<Destroyable>().Destroy();
+
+        if (collision.gameObject.GetComponent<Destroyer>())
+            gameObject.GetComponent<Destroyable>().Destroy();
     }
 }
